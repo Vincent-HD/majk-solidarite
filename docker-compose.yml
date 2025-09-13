@@ -1,0 +1,33 @@
+services:
+  php:
+    image: majk-solidarite-php
+    build: .
+    ports:
+      - "80:80" # HTTP
+      - "443:443" # HTTPS
+      - "443:443/udp" # HTTP/3
+    volumes:
+      - ./php/app:/var/www/html
+      - ./config/caddy/Caddyfile:/config/caddy/Caddyfile:ro
+      - ./config/php/zz-php-config.ini:/usr/local/etc/php/conf.d/zz-php-config.ini:ro
+      - ./config/php/zz-opcache.ini:/usr/local/etc/php/conf.d/zz-opcache.ini:ro
+      - majk-solidarite-caddy-data:/data
+    # environment:
+      # - ENABLE_PHP_TOOLS=true
+    # comment the following line in production, it allows to have nice human-readable logs in dev
+    tty: true
+
+  mysql:
+    image: mysql:8.0
+    volumes:
+      - majk-solidarite-mysql-data:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=majk_solidarite
+      - MYSQL_USER=majk_solidarite
+      - MYSQL_PASSWORD=majk_solidarite
+
+# Volumes needed for Caddy certificates and configuration
+volumes:
+  majk-solidarite-caddy-data:
+  majk-solidarite-mysql-data:
