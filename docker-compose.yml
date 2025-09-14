@@ -13,21 +13,11 @@ services:
       - ./config/php/zz-opcache.ini:/usr/local/etc/php/conf.d/zz-opcache.ini:ro
       - majk-solidarite-caddy-data:/data
     # environment:
-      # - ENABLE_PHP_TOOLS=true
+    #   - SERVER_NAME=localhost
+    #   - ENABLE_PHP_TOOLS=true
     # comment the following line in production, it allows to have nice human-readable logs in dev
-    tty: true
-
-  mysql:
-    image: mysql:8.0
-    volumes:
-      - majk-solidarite-mysql-data:/var/lib/mysql
-    environment:
-      - MYSQL_ROOT_PASSWORD=root
-      - MYSQL_DATABASE=majk_solidarite
-      - MYSQL_USER=majk_solidarite
-      - MYSQL_PASSWORD=majk_solidarite
+    tty: false
 
 # Volumes needed for Caddy certificates and configuration
 volumes:
   majk-solidarite-caddy-data:
-  majk-solidarite-mysql-data:
