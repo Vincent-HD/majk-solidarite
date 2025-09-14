@@ -8,9 +8,9 @@ services:
       - ./config/php/zz-php-config.ini:/usr/local/etc/php/conf.d/zz-php-config.ini:ro
       - ./config/php/zz-opcache.ini:/usr/local/etc/php/conf.d/zz-opcache.ini:ro
       - majk-solidarite-caddy-data:/data
-    # environment:
-    #   - SERVER_NAME=localhost
-    #   - ENABLE_PHP_TOOLS=true
+    environment:
+      - SERVER_NAME=${SERVER_NAME:-:80}
+      - ENABLE_PHP_TOOLS=${ENABLE_PHP_TOOLS:-false}
     # comment the following line in production, it allows to have nice human-readable logs in dev
     tty: false
 
