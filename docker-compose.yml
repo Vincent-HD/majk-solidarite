@@ -3,7 +3,7 @@ services:
     image: majk-solidarite-php
     build: .
     volumes:
-      - ./php/app:/var/www/html
+      - ${APP_DIR_PATH}:/var/www/html
       - ./config/caddy/Caddyfile:/config/caddy/Caddyfile:ro
       - ./config/php/zz-php-config.ini:/usr/local/etc/php/conf.d/zz-php-config.ini:ro
       - ./config/php/zz-opcache.ini:/usr/local/etc/php/conf.d/zz-opcache.ini:ro
