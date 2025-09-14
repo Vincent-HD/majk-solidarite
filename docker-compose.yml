@@ -2,10 +2,6 @@ services:
   php:
     image: majk-solidarite-php
     build: .
-    ports:
-      - "80:80" # HTTP
-      - "443:443" # HTTPS
-      - "443:443/udp" # HTTP/3
     volumes:
       - ./php/app:/var/www/html
       - ./config/caddy/Caddyfile:/config/caddy/Caddyfile:ro
