@@ -2,6 +2,7 @@ services:
   php:
     image: majk-solidarite-php
     build: .
+    pull_policy: always
     volumes:
       - ${APP_DIR_PATH}:/var/www/html
       - ./config/caddy/Caddyfile:/config/caddy/Caddyfile:ro
