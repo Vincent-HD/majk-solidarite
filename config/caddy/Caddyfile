@@ -4,7 +4,8 @@
 	{$CADDY_GLOBAL_OPTIONS}
 
 	frankenphp {
-		#worker /path/to/your/worker.php
+		num_threads 6
+
 		{$FRANKENPHP_CONFIG}
 	}
 
