@@ -1,0 +1,17 @@
+services:
+  php:
+    extends:
+      file: compose.yml
+      service: php
+    volumes:
+      - ${APP_DIR_PATH}:/var/www/html
+    environment:
+      - SERVER_NAME=${SERVER_NAME:-:80}
+      - ENABLE_PHP_TOOLS=${ENABLE_PHP_TOOLS:-false}
+      - WORDPRESS_DB_HOST=${WORDPRESS_DB_HOST}
+      - WORDPRESS_DB_NAME=${WORDPRESS_DB_NAME}
+      - WORDPRESS_DB_USER=${WORDPRESS_DB_USER}
+      - WORDPRESS_DB_PASSWORD=${WORDPRESS_DB_PASSWORD}
+
+volumes:
+  majk-solidarite-caddy-data:

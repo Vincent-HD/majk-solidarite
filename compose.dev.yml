@@ -1,0 +1,32 @@
+services:
+  php:
+    extends:
+      file: compose.yml
+      service: php
+    volumes:
+      - ./data/app:/var/www/html
+    environment:
+      - SERVER_NAME=${SERVER_NAME:-:80}
+      - ENABLE_PHP_TOOLS=true
+      - WORDPRESS_DB_HOST=mysql
+      - WORDPRESS_DB_NAME=majk
+      - WORDPRESS_DB_USER=majk
+      - WORDPRESS_DB_PASSWORD=majk
+    ports:
+      - 9000:80
+    tty: true
+
+  mysql:
+    image: mysql:8.0
+    ports:
+      - 3306:3306
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=majk
+      - MYSQL_USER=majk
+      - MYSQL_PASSWORD=majk
+    volumes:
+      - ./data/db:/var/lib/mysql
+
+volumes:
+  majk-solidarite-caddy-data:

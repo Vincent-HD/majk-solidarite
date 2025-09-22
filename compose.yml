@@ -1,0 +1,8 @@
+services:
+  php:
+    image: majk-solidarite-php
+    build: .
+    volumes:
+      - majk-solidarite-caddy-data:/data
+      - ./config/caddy/Caddyfile:/config/caddy/Caddyfile:ro
+    tty: false
