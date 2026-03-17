@@ -6,3 +6,6 @@ services:
       - majk-solidarite-caddy-data:/data
       - ./config/caddy/Caddyfile:/config/caddy/Caddyfile:ro
     tty: false
+
+volumes:
+  majk-solidarite-caddy-data:
