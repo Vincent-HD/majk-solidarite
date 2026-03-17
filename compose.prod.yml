@@ -12,7 +12,33 @@ services:
       - WORDPRESS_DB_NAME=${WORDPRESS_DB_NAME}
       - WORDPRESS_DB_USER=${WORDPRESS_DB_USER}
       - WORDPRESS_DB_PASSWORD=${WORDPRESS_DB_PASSWORD}
+  mysql:
+    image: mysql:8.0
+    environment:
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+    volumes:
+      - majk-solidarite-database-data:/var/lib/mysql
+    network_mode: service:tailscale
+  tailscale:
+    image: tailscale/tailscale:latest
+    hostname: majk-solidarite-database
+    environment:
+      - TS_AUTHKEY=${TS_AUTHKEY}
+      #- TS_EXTRA_ARGS=--advertise-tags=tag:container
+      - TS_STATE_DIR=/var/lib/tailscale
+      - TS_USERSPACE=false
+    volumes:
+      - majk-solidarite-tailscale-data:/var/lib/tailscale
+    devices:
+      - /dev/net/tun:/dev/net/tun
+    cap_add:
+      - net_admin
 
 volumes:
   majk-solidarite-caddy-data:
   majk-solidarite-wordpress-data:
+  majk-solidarite-database-data:
+  majk-solidarite-tailscale-data:
