@@ -21,6 +21,8 @@ services:
       - MYSQL_PASSWORD=${MYSQL_PASSWORD}
     volumes:
       - majk-solidarite-database-data:/var/lib/mysql
+    depends_on:
+      - tailscale
     network_mode: service:tailscale
   tailscale:
     image: tailscale/tailscale:latest
