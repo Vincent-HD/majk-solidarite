@@ -24,7 +24,7 @@ services:
     volumes:
       - majk-solidarite-database-data:/var/lib/mysql
     healthcheck:
-      test: [ "CMD", "mysql", "--user=root", "--password='${MYSQL_ROOT_PASSWORD}'", "--execute='SHOW DATABASES;'" ]
+      test: [ "CMD-SHELL", "mysql --user=root --password='${MYSQL_ROOT_PASSWORD}' --execute='SHOW DATABASES;'" ]
     depends_on:
       - tailscale
     network_mode: service:tailscale
@@ -39,7 +39,7 @@ services:
     volumes:
       - majk-solidarite-tailscale-data:/var/lib/tailscale
     healthcheck:
-      test: [ "CMD", "tailscale", "status", "--peers=false", "--json", "|", "grep" ,"-q", "'Online.*true'" ]
+      test: [ "CMD-SHELL", "tailscale status --peers=false --json | grep -q 'Online.*true'" ]
     devices:
       - /dev/net/tun:/dev/net/tun
     cap_add:
