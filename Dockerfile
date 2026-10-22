@@ -1,7 +1,11 @@
-ARG PHP_VERSION=8.3
+ARG PHP_VERSION=8.3.36
 ARG WORDPRESS_VERSION=latest
 FROM wordpress:$WORDPRESS_VERSION AS wp
 FROM dunglas/frankenphp:php${PHP_VERSION}
+
+# Require the PHP 8.3 security fix for CVE-2026-109618 and CVE-2026-109619.
+RUN frankenphp php-cli -r \
+    'echo "PHP ", PHP_VERSION, PHP_EOL; if (PHP_VERSION_ID < 80336 || PHP_VERSION_ID >= 80400) { fwrite(STDERR, "PHP 8.3.36 or a newer PHP 8.3 patch release is required.\n"); exit(1); }'
 
 ARG USER=www-data
 ARG UID=1000
