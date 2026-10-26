@@ -1,7 +1,8 @@
 ARG PHP_VERSION=8.3.36
+ARG FRANKENPHP_VERSION=1.13.3
 ARG WORDPRESS_VERSION=latest
 FROM wordpress:$WORDPRESS_VERSION AS wp
-FROM dunglas/frankenphp:php${PHP_VERSION}
+FROM dunglas/frankenphp:${FRANKENPHP_VERSION}-php${PHP_VERSION}
 
 # Require the PHP 8.3 security fix for CVE-2026-109618 and CVE-2026-109619.
 RUN frankenphp php-cli -r \
